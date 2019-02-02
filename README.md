@@ -1,18 +1,18 @@
 # Doorbell Dash
-- An Internet of Things device implementing Raspberry Pi, Amazon Dash Buttons, Python 3, Twilio and Imgur API's. 
-- A Wi-Fi enabled doorbell using an Amazon Dash button, that when pressed, takes a photo with the Raspberry Pi camera and sends a photo text message to your phone via Twilio and Imgur. 
+- An Internet of Things device implementing Raspberry Pi, Amazon Dash Buttons, Python 3, IFTTT and Imgur API. 
+- A Wi-Fi enabled doorbell using an Amazon Dash button, that when pressed, takes a photo with the Raspberry Pi camera and sends an IFTTT notification to your phone with an Imgur link. 
 
 ## What you'll need
 * Amazon Dash Button ($1 - $5)
 * Raspberry Pi
 * Pi-camera
-* Twilio account for texting service (free)
+* IFTTT account for notifications (free)
 * Imgur account for images (free)
 
 ## Installation on your Raspberry Pi
 * $ <code>pip3 install scapy-python3</code>
-* $ <code>pip install twilio</code>
 * $ <code>pip install pyimgur</code>
+* $ <code>pip install requests</code>
 
 ## 'Hack' Amazon Dash Button
 * Open the Amazon Shopping app on your PHONE.
@@ -28,17 +28,24 @@
 - In a web browser, go to: http://192.168.0.1/
 - Make note of the MAC address of your Dash Button. Note: For the python code, MAC address needs to be all lower case!
 
-## Setup Twilio Account
-* To receive SMS notifications, you need to sign up for Twilio
-* Signup for a free Twilio account
-* As part of the signup process, you need to verify a phone number. Use the cell phone number that you want to send messages to.
-* After you verify your phone number, Twilio will assign you a local phone number. This is the phone number that will be sending the text messages.
-* Click "get started", then "Go to Your Account".
-* When you login to your account, you will see an Account SID and Auth Token field. Click on the lock icon in front of the Auth Token field. Make note of these two values. You will need them for the Python code.
+## Setup IFTTT Account
+To receive IFTTT notifications you'll need to create an account on IFTT.com account
 
-## Twilio Notes
-* Twilio prepends “Sent from a Twilio Trial account” to trial account text messages.
-* The service is free as long as you are sending 250 messages or less per month.
+1. Visit https://ifttt.com/create
+1. Click on "This"
+1. Select "Webhooks"
+1. Select "Receive web request"
+1. Enter the event name
+1. Click "Create"
+1. Click on "That"
+1. Select "Notifications"
+1. Select "Send a notification from the IFTTT app"
+1. Paste in the following: "Doorbell has been pressed {{Value1}}"
+1. Click "Create Action"
+1. Click "Finish"
+1. Visit https://ifttt.com/maker_webhooks
+1. Copy + paste the event url into the .env file (https://maker.ifttt.com/trigger/{event_name_you_set}/with/key/YOURUNIQUEKEY)
+1. Install the IFTTT app on your phone and sign in.
 
 ## General Notes
 * !! <strong> RENAME ExampleCreds.py to creds.py </strong> !! Put in all the information you received from Imgur and Twilio here. This will store all personal information (phone numbers, API tokens, etc).  This is not in the project, as it is in the gitignore.
@@ -71,6 +78,7 @@
 
 ## Credits
 * Nick Chemsak
+* Brian Dauernheim
 
 ## License
 [MIT License](https://github.com/nchemsak/doorbell_dash_angularJS/blob/master/LICENSE)
