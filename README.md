@@ -76,14 +76,16 @@ To receive IFTTT notifications you'll need to create an account on IFTT.com acco
 * If you prefer, you can set this up to run as a service:
 1. Use the file called dash.service in the doorbell_dash directory.
 2. Set up a symlink to the service:
-<code># Move to the directory with the .service file
+```
+# Move to the directory with the .service file
 cd ~/doorbell_dash/
 
 # Create the symlink
 sudo ln -s `pwd`/dash.service /lib/systemd/system
 
 # Reload the service files so the system knows about this new one
-sudo systemctl daemon-reload</code>
+sudo systemctl daemon-reload
+```
 3. Now tell the system to run this service on bootup:
 <code>sudo systemctl enable dash.service</code>
 4. You can try rebooting now to see it work, or manually run it with this command:
