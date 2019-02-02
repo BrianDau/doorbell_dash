@@ -1,11 +1,11 @@
 import picamera
 import datetime
-from send_text import SMStext
+from ifttt import UploadAndSendNotification
 
 IMG_WIDTH = 800
 IMG_HEIGHT = 600
 
-IMAGE_DIR_DB = "doorbell_dash_project/photos/photos/"
+IMAGE_DIR_DB = "/home/pi/doorbell_dash/doorbell_dash_project/photos/photos/"
 IMAGE_DIR = "/home/pi/Desktop/"
 
 IMG = "snap.jpg"
@@ -16,8 +16,10 @@ file = "".join([IMAGE_DIR_DB, suffix])
 
 def pic():
     camera = picamera.PiCamera()
-    camera.vflip = True
-    camera.hflip = True
+    # YMMV, adjust these depending on the orientation of your camera
+    camera.vflip = False
+    camera.hflip = False
+    camera.rotation=270
     camera.brightness = 60
     camera.resolution = (IMG_WIDTH, IMG_HEIGHT)
     camera.capture(IMAGE_DIR + IMG)
@@ -26,13 +28,13 @@ def pic():
 
 
 def pic_to_db():
+    # YMMV, adjust these depending on the orientation of your camera
     camera = picamera.PiCamera()
-    camera.vflip = True
-    camera.hflip = True
+    camera.vflip = False
+    camera.hflip = False
+    camera.rotation=270
     camera.brightness = 60
     camera.resolution = (IMG_WIDTH, IMG_HEIGHT)
     camera.capture(file)
     camera.close()
-    SMStext()
-
-
+    UploadAndSendNotification()

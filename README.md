@@ -1,6 +1,6 @@
 # Doorbell Dash
-- An Internet of Things device implementing Raspberry Pi, Amazon Dash Buttons, Python 3, IFTTT and Imgur API. 
-- A Wi-Fi enabled doorbell using an Amazon Dash button, that when pressed, takes a photo with the Raspberry Pi camera and sends an IFTTT notification to your phone with an Imgur link. 
+- An Internet of Things device implementing Raspberry Pi, Amazon Dash Buttons, Python 3, IFTTT and Imgur API.
+- A Wi-Fi enabled doorbell using an Amazon Dash button, that when pressed, takes a photo with the Raspberry Pi camera and sends an IFTTT notification to your phone with an Imgur link.
 
 ## What you'll need
 * Amazon Dash Button ($1 - $5)
@@ -51,7 +51,7 @@ To receive IFTTT notifications you'll need to create an account on IFTT.com acco
 1. Install the IFTTT app on your phone and sign in.
 
 ## General Notes
-* !! <strong> RENAME ExampleCreds.py to creds.py </strong> !! Put in all the information you received from Imgur and Twilio here. This will store all personal information (phone numbers, API tokens, etc).  This is not in the project, as it is in the gitignore.
+* !! <strong> RENAME ExampleCreds.py to creds.py </strong> !! Put in all the information you received from Imgur and IFTTT here. This will store all personal information (phone numbers, API tokens, etc).  This is not in the project, as it is in the gitignore.
 * ARP (Address Resolution Protocol) is used for mapping a network address to a physical address. EXAMPLE:  IP Address to a MAC address.
 * Problems with Raspberry Pi and camera communicating? Check to make sure your Pi detects the camera: <br>
   <code>$vcgencmd get_camera</code>
@@ -68,9 +68,26 @@ To receive IFTTT notifications you'll need to create an account on IFTT.com acco
 
 ## Usage
 * You must run script as root user / SUDO
-* $ <code>SUDO python arp.py</code>
+* $ <code>SUDO python main.py</code>
 * For the doorbell to work, keep this script running.  
-* arp.py runs a packet sniffer on your local network looking for MAC addresses that are linked to Amazon Dash Buttons.
+* main.py runs a packet sniffer on your local network looking for MAC addresses that are linked to Amazon Dash Buttons.
+
+## Run as a service
+* If you prefer, you can set this up to run as a service:
+1. Use the file called dash.service in the doorbell_dash directory.
+2. Set up a symlink to the service:
+<code># Move to the directory with the .service file
+cd ~/doorbell_dash/
+
+# Create the symlink
+sudo ln -s `pwd`/dash.service /lib/systemd/system
+
+# Reload the service files so the system knows about this new one
+sudo systemctl daemon-reload</code>
+3. Now tell the system to run this service on bootup:
+<code>sudo systemctl enable dash.service</code>
+4. You can try rebooting now to see it work, or manually run it with this command:
+<code>sudo service assistant_grpc_demo start</code>
 
 ## Contributing
 1. Fork it!
@@ -85,5 +102,3 @@ To receive IFTTT notifications you'll need to create an account on IFTT.com acco
 
 ## License
 [MIT License](https://github.com/nchemsak/doorbell_dash_angularJS/blob/master/LICENSE)
-
-
