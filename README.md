@@ -73,7 +73,7 @@ To receive IFTTT notifications you'll need to create an account on IFTT.com acco
 * main.py runs a packet sniffer on your local network looking for MAC addresses that are linked to Amazon Dash Buttons.
 
 ## Run as a service
-* If you prefer, you can set this up to run as a service:
+If you prefer, you can set this up to run as a service:
 1. Use the file called dash.service in the doorbell_dash directory.
 2. Set up a symlink to the service:
 ```
