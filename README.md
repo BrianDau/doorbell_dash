@@ -43,8 +43,11 @@ To receive IFTTT notifications you'll need to create an account on IFTT.com acco
 1. Paste in the following: "Doorbell has been pressed {{Value1}}"
 1. Click "Create Action"
 1. Click "Finish"
-1. Visit https://ifttt.com/maker_webhooks
+1. Visit https://ifttt.com/services/maker_webhooks/settings
 1. Copy + paste the event url into the .env file (https://maker.ifttt.com/trigger/{event_name_you_set}/with/key/YOURUNIQUEKEY)
+  1. Your key is listed in your account info at the end of the URL: https://maker.ifttt.com/use/YOURUNIQUEKEY
+  1. Your event name is whatever you chose above.
+  1. You can also test your event by opening the URL in your account info, and pasting in your event name and any values needed.
 1. Install the IFTTT app on your phone and sign in.
 
 ## General Notes
