@@ -1,0 +1,16 @@
+[Unit]
+Description=Doorbell
+Wants=network-online.target
+After=network-online.target
+Wants=systemd-timesyncd.service
+After=systemd-timesyncd.service
+
+[Service]
+Environment=DISPLAY=:0
+Type=simple
+Restart=always
+#User=pi
+ExecStart=/usr/bin/python -u /home/pi/doorbell_dash/main.py --language en-US
+
+[Install]
+WantedBy=multi-user.target
